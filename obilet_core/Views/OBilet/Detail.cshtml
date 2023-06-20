@@ -1,0 +1,34 @@
+﻿@using System.Globalization;
+@model GetJourneysResponseModel
+
+@if (Model.Data != null && Model.Data.Count > 0)
+{
+	<div>
+		<a href="@Url.Action("ClearCacheAndGoBack")" class="btn btn-primary">Geri</a>
+	</div>
+	<div class="blue-bar">
+		<h2>@Model.Data[0].OriginLocation - @Model.Data[0].DestinationLocation</h2>
+		<p>@Model.Data[0]?.Journey?.Departure.ToString("dd MMMM dddd")</p>
+	</div>
+
+	foreach (var data in Model.Data)
+	{
+		<div class="row border rounded mb-4 p-2">
+			<div class="col-4">
+				<strong>kalkış</strong> <br />
+				@data?.Journey?.Departure.ToString("HH:mm") <br />
+				@data.Journey.Origin
+			</div>
+			<div class="col-4">
+				<strong>varış</strong> <br />
+				@data?.Journey?.Arrival.ToString("HH:mm") <br />
+				@data.Journey.Destination
+			</div>
+			<div class="col-4">
+				<a href="#" class="btn btn-danger btn-block">
+					@data.Journey.OriginalPrice.ToString("C", CultureInfo.CurrentCulture)
+				</a>
+			</div>
+		</div>
+	}
+}

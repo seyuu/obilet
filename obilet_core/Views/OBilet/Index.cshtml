@@ -1,0 +1,43 @@
+﻿@model QueryModel
+
+<form method="post" asp-action="Index" class="container">
+    <div class="form-group">
+        <label asp-for="OriginId">Nerden :</label>
+        <select asp-for="OriginId" asp-items="ViewBag.BusLocations" class="form-control select2"></select>
+        <span asp-validation-for="OriginId" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="DestinationId">Nereye :</label>
+        <select asp-for="DestinationId" asp-items="ViewBag.BusLocations" class="form-control select2"></select>
+        <span asp-validation-for="DestinationId" class="text-danger"></span>
+    </div>
+    <label asp-for="Date">Tarih:</label>
+
+    <div class="form-row">
+        <div class="form-group col-10">
+            <input type="date" asp-for="Date" class="form-control" />
+            <span asp-validation-for="Date" class="text-danger"></span>
+        </div>
+        <div class="form-group col-1">
+            <button type="submit" class="btn btn-secondary btn-block" name="buttonClicked" value="Today">Bugün</button>
+        </div>
+        <div class="form-group col-1">
+            <button type="submit" class="btn btn-secondary btn-block" name="buttonClicked" value="Tomorrow">Yarın</button>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Bileti Bul</button>
+</form>
+
+@section Scripts {
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('.select2').select2({
+                tags: true,
+                tokenSeparators: [',', ' ']
+            });
+        });
+    </script>
+}
